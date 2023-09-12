@@ -8,12 +8,6 @@ pipeline {
             }
         }
         
-        stage('Code Compile') {
-            steps {
-                 sh 'mvn compile'
-            }
-        }
-        
         stage('Code Test') {
             steps {
                  sh 'mvn test'
