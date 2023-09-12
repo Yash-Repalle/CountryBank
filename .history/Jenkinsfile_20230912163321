@@ -20,9 +20,9 @@ pipeline {
             }
         }
         
-        stage('Code Integration test') {
+        stage('Code Inte') {
             steps {
-                 sh 'mvn verify -DskipUnitTests'
+                 sh 'mvn test'
             }
         }
     }

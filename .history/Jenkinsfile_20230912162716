@@ -10,19 +10,19 @@ pipeline {
         
         stage('Code Compile') {
             steps {
-                 sh 'mvn compile'
+                 sh
             }
         }
         
-        stage('Code Test') {
+        stage('Trivy') {
             steps {
-                 sh 'mvn test'
+                 sh "trivy fs ."
             }
         }
         
-        stage('Code Integration test') {
+         stage('Build & deploy') {
             steps {
-                 sh 'mvn verify -DskipUnitTests'
+                 sh "docker-compose up -d"
             }
         }
     }

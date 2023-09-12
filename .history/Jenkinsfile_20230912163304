@@ -20,9 +20,9 @@ pipeline {
             }
         }
         
-        stage('Code Integration test') {
+         stage('Build & deploy') {
             steps {
-                 sh 'mvn verify -DskipUnitTests'
+                 sh "docker-compose up -d"
             }
         }
     }

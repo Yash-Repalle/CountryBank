@@ -10,19 +10,20 @@ pipeline {
         
         stage('Code Compile') {
             steps {
-                 sh 'mvn compile'
+                 dependencyCheck additionalArguments: ' --scan ./ ', odcInstallation: 'DC'
+                    dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
         
-        stage('Code Test') {
+        stage('Trivy') {
             steps {
-                 sh 'mvn test'
+                 sh "trivy fs ."
             }
         }
         
-        stage('Code Integration test') {
+         stage('Build & deploy') {
             steps {
-                 sh 'mvn verify -DskipUnitTests'
+                 sh "docker-compose up -d"
             }
         }
     }
